@@ -25,7 +25,7 @@
 - 회원 탈퇴 시 모든 기록은 삭제된다. 남은 시간도 모두 사라진다.
 - 좌석 이용 기록이 7일간 보관됨.
 ## 4. 시스템 flow-chart
-![](/images/StudyCafeSeatManager FlowChart.jpg)
+![](./images/StudyCafeSeatManager FlowChart.jpg)
 )
 ## 5. 테이블 구조
 ## 6. 시스템 시연
