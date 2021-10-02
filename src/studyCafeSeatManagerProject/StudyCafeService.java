@@ -28,7 +28,7 @@ public class StudyCafeService {
 	public void deleteMyAccount() {
 		dao.deleteMyAccount();
 	}
-	public static void charge(CafeUserVO user, int hour) {
+	public void charge(CafeUserVO user, int hour) {
 		dao.charge(user, hour);
 	}
 //	public void charge2(CafeUserVO user, int hour) {
@@ -72,7 +72,7 @@ public class StudyCafeService {
 	public String getRemainTime(CafeUserVO user) {
 		return dao.getRemainTime(user);
 	}
-	public static void memberChargePage(CafeUserVO user,String inputStr) {
+	public void memberChargePage(CafeUserVO user,String inputStr) {
 		dao.memberChargePage(user,inputStr);
 	}
 }

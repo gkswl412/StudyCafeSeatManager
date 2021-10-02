@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class StudyCafeDAO {
 	static StudyCafeView view = new StudyCafeView();
@@ -222,9 +223,14 @@ public class StudyCafeDAO {
 	}
 	
 	public void signUp() {
+		String regExp="";
 		String phone_number="";
 		String id="";
 		String email="";
+		String name="";
+		String password="";
+		boolean b = false;
+		boolean c = false;
 		List<String> ckPhone = new ArrayList<>();
 		List<String> ckID = new ArrayList<>();
 		List<String> ckEmail = new ArrayList<>();
@@ -258,14 +264,29 @@ public class StudyCafeDAO {
 			e1.printStackTrace();
 		} finally {
 			DBUtil.dbClose(concon, pstpst, rsrs);
-		}	
-		
-		System.out.print("¿Ã∏ß>");
-		String name = sc.next();
-		boolean b = true;
+		}
+		while(b==false){
+			System.out.print("¿Ã∏ß>");
+			name = sc.next();
+			regExp = "[∞°-∆R]{1,5}";
+			b = Pattern.matches(regExp, name);
+			if(!b) {
+				System.out.println("√÷¥Î «—±€ 5±€¿⁄. ¥ŸΩ√ ¿‘∑¬ ø‰∏¡.");
+			}
+		}
+		System.out.println("¿Ã∏ß µÓ∑œ øœ∑·");
 		while(b == true) {
-			System.out.print("«⁄µÂ∆˘ π¯»£>");
-			phone_number = sc.next();
+			c = false;
+			while(c==false) {
+				System.out.print("«⁄µÂ∆˘ π¯»£>");
+				phone_number = sc.next();
+				regExp = "010[0-9]{3,4}[0-9]{4}";
+				c = Pattern.matches(regExp, phone_number);
+				if(c==false) {
+					System.out.println("ø«πŸ∏• ¿‘∑¬¿Ã æ∆¥’¥œ¥Ÿ!");
+					System.out.println("(-æ¯¿Ã 10~11¿⁄∏Æ ex)01000000000)");
+				}
+			}
 			int count = 0;
 			for(String ph:ckPhone) {
 				if(ph.equals(phone_number)) {
@@ -279,8 +300,17 @@ public class StudyCafeDAO {
 			}
 		}	
 		while(b == false) {
-			System.out.print("ID>");
-			id = sc.next();
+			c = true;
+			while(c == true) {
+				System.out.print("ID>");
+				id = sc.next();
+				regExp = "[a-z0-9]{1,}";
+				c = !(Pattern.matches(regExp, id));
+				if(c == true) {
+					System.out.println("ø«πŸ∏• ¿‘∑¬¿Ã æ∆¥’¥œ¥Ÿ!");
+					System.out.println("(øµæÓ º“πÆ¿⁄ + º˝¿⁄)");
+				}
+			}
 			int count = 0;
 			for(String d:ckID) {
 				if(d.equals(id)) {
@@ -293,11 +323,29 @@ public class StudyCafeDAO {
 				b = true;
 			}
 		}
-		System.out.print("Password>");
-		String password = sc.next();
-		while(b == true) {
-			System.out.print("email>");
-			email = sc.next();
+		while(b==true) {
+			System.out.print("Password>");
+			password = sc.next();
+			regExp = "^(?=.*[a-z])(?=.*\\d)(?=.*[!@#$%^&*])[a-z\\d!@#$%^&*]{10,20}$";
+			b = !(Pattern.matches(regExp, password));
+			if(b==true) {
+				System.out.println("ø«πŸ∏• ¿‘∑¬¿Ã æ∆¥’¥œ¥Ÿ!");
+				System.out.println("øµæÓ º“πÆ¿⁄ + º˝¿⁄ + ∆Øºˆ πÆ¿⁄(!@#$%^&*) ¿⁄∏¥ºˆ:10~20");
+			}
+		}
+		System.out.println("∫Òπ–π¯»£ µÓ∑œ øœ∑·");
+		while(b == false) {
+			c = false;
+			while(c==false) {
+				System.out.print("email>");
+				email = sc.next();
+				regExp = "[a-z0-9]+@[a-z0-9]+\\.[a-z0-9]+(\\.[a-z0-9]+)?";
+				c = Pattern.matches(regExp, email);
+				if(c==false) {
+					System.out.println("ø«πŸ∏• ¿‘∑¬¿Ã æ∆¥’¥œ¥Ÿ!");
+					System.out.println("ex)aaaa@aaaa.com");
+				}
+			}
 			int count = 0;
 			for(String e:ckEmail) {
 				if(e.equals(email)) {
@@ -307,7 +355,7 @@ public class StudyCafeDAO {
 			}
 			if(count == 0) {
 				System.out.println("email µÓ∑œ øœ∑·");
-				b = false;
+				b = true;
 			}
 		}
 		int remain_time = 0;
@@ -424,7 +472,7 @@ public class StudyCafeDAO {
 		} else {
 			return time/86400 + " ¿œ " + (time%86400)/3600 + 
 					" Ω√∞£ " + ((time%86400)%3600)/60 + " ∫– " + 
-					(((time%86400)%3600)/60)%60 + " √  ";
+					((time%86400)%3600)%60 + " √  ";
 		}
 	}
 	
