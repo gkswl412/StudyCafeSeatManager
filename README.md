@@ -27,6 +27,7 @@
 ## 4. 시스템 flow-chart
 ![](./images/StudyCafeSeatManager%20FlowChart.jpg)
 ## 5. 테이블 구조
+![](https://github.com/gkswl412/StudyCafeSeatManager/blob/master/images/StudyCafeSeatManagerTable.png)
 ## 6. 시스템 시연
 - 직접 외부 시연
 ## 7. 시스템 구현 주요사항
