@@ -172,10 +172,29 @@ public class StudyCafeDAO {
 	}
 	
 	public CafeUserVO nonMemberLogin() {
-		System.out.print("ÀÌ¸§>");
-		String name = sc.next();
-		System.out.print("ÇÚµåÆù ¹øÈ£>");
-		String phone_number = sc.next();
+		boolean b = false;
+		String name="";
+		String regExp="";
+		String phone_number="";
+		while(b==false){
+			System.out.print("ÀÌ¸§>");
+			name = sc.next();
+			regExp = "[°¡-ÆR]{1,5}";
+			b = Pattern.matches(regExp, name);
+			if(!b) {
+				System.out.println("ÃÖ´ë ÇÑ±Û 5±ÛÀÚ. ´Ù½Ã ÀÔ·Â ¿ä¸Á.");
+			}
+		}
+		while(b == true) {
+			System.out.print("ÇÚµåÆù ¹øÈ£>");
+			phone_number = sc.next();
+			regExp = "010[0-9]{3,4}[0-9]{4}";
+			b = !Pattern.matches(regExp, phone_number);
+			if(b == true) {
+				System.out.println("¿Ç¹Ù¸¥ ÀÔ·ÂÀÌ ¾Æ´Õ´Ï´Ù!");
+				System.out.println("(-¾øÀÌ 10~11ÀÚ¸® ex)01000000000)");
+			}
+		}	
 		CafeUserVO user = null;
 		Connection conn = DBUtil.dbConnect();
 		PreparedStatement st = null;

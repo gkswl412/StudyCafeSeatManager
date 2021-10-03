@@ -5,13 +5,17 @@ import java.util.List;
 public class StudyCafeView {
 	StudyCafeDAO dao = new StudyCafeDAO();
 	public void memberListDisplay(List<CafeUserVO> list) {
-		System.out.printf("%s\t%-14s%-15s%s","이름","핸드폰번호","아이디","e-mail");
-		System.out.println();
-		System.out.println("===============================================================");
-		for(CafeUserVO user:list) {
-			System.out.printf("%s\t%-15s\t%-15s\t%s",user.getName(),
-					user.getPhone_number(),user.getId(),user.getEmail());
+		if(list.size()==0) {
+			System.out.println("가입한 회원이 없습니다.");
+		}else {
+			System.out.printf("%s\t%-14s%-15s%s","이름","핸드폰번호","아이디","e-mail");
 			System.out.println();
+			System.out.println("===============================================================");
+			for(CafeUserVO user:list) {
+				System.out.printf("%s\t%-15s\t%-15s\t%s",user.getName(),
+						user.getPhone_number(),user.getId(),user.getEmail());
+				System.out.println();
+			}
 		}
 	}
 	
@@ -39,7 +43,7 @@ public class StudyCafeView {
 			System.out.println();
 			System.out.println("==========================================================================================");
 			for(StatusVO st:realTimeStatus) {
-				System.out.printf("%d\t%s\t%s\t%-5s\t%-30s\t%s",st.getSeatno(),st.getName(),st.getPhone_number(),
+				System.out.printf("%d\t%s\t%-12s\t%-10s\t%-30s\t%s",st.getSeatno(),st.getName(),st.getPhone_number(),
 						st.getId(),st.getStart_time(),st.getTemp_remain_time());
 				System.out.println();
 			}
